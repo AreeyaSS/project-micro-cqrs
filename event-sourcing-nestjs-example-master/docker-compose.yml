@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  app_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '${APP_PORT}:3000'
+    environment:
+      KAFKA_BOOSTRAP_SERVERS: kafka:29092
+      KAFKA_GROUP_ID: user
+      REDIS_URL: ${REDIS_URL}
+      MONGO_URL: ${MONGO_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: ${APP_PORT}
+      NODE_ENV: developer
+    volumes:
+      - ./src:/usr/src/app/src
+  #   depends_on:
+  #     - redis
+  #     - mongo
+
+  # redis:
+  #   image: redis:latest
+  #   ports:
+  #     - "6379:6379"
+
+  # mongo:
+  #   image: mongo:latest
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+
+networks:
+  default:
+    external:
+      name: microservice_network
