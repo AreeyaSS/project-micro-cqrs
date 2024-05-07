@@ -17,6 +17,8 @@ services:
       #MONGODB_AUTH_DATABASE: admin
     ports:
       - "27017:27017"
+    networks:
+      - microservice_network
     volumes:
       - ./workspace:/workspace
       - type: volume
@@ -40,9 +42,7 @@ services:
     depends_on:
       - mongo
 networks:
-  default:
-    external:
-      name: microservice_network
+  microservice_network:
 volumes:
   mongodb_data_volume:
     driver: local    

@@ -1,15 +1,15 @@
 version: '3'
 services:
   redis:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     image: redis:7-alpine
     restart: always
     ports:
       - "6379:6379"
     environment:
       REDIS_PASSWORD: password123
+    networks:
+      - microservice_network
   redis-insight:
     image: redis/redisinsight:latest
     restart: always
@@ -20,8 +20,6 @@ services:
     depends_on:
       - redis
 networks:
-  default:
-    external:
-      name: microservice_network
+  microservice_network:
 volumes:
   redis-insight:
