@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  cqrs-event-sourcing-services:
+    build: .
+    image: cqrs-event-sourcing-services:latest
+    ports:
+      # - '${APP_PORT}:3000'
+      - '3005:3000'
+    environment:
+      # KAFKA_BOOSTRAP_SERVERS: kafka:29092
+      # KAFKA_GROUP_ID: user
+      # REDIS_URL: ${REDIS_URL}
+      # MONGO_URL: ${MONGO_URL}
+      # JWT_SECRET: ${JWT_SECRET}
+      # PORT: ${APP_PORT}
+      REDIS_URL: "redis://localhost:6379/0"
+      MONGO_URL: "mongodb://mongoadmin:mongoadmin@localhost:27017/eventstore?directConnection=true&authSource=admin"
+      JWT_SECRET: "STHOCAACRHUYUDKJAEAFUNM9XNRYMQKQWUROHGFFAWWHBDLRUEKP9XELIWDHWILSIHJTHDJKBCOCSNGLT"
+      PORT: 3005
+      NODE_ENV: developer
+
+networks:
+  microservice_network:
