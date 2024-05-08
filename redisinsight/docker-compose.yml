@@ -8,8 +8,6 @@ services:
       - "6379:6379"
     environment:
       REDIS_PASSWORD: password123
-    networks:
-      - microservice_network
   redis-insight:
     image: redis/redisinsight:latest
     restart: always

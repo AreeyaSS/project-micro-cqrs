@@ -33,7 +33,7 @@ VOLUME /data
 EXPOSE 5000
 
 USER node
-ENV NODE_ENV=production
+ENV NODE_ENV=developer
 ENV SERVER_STATIC_CONTENT=true
 ENV BUILD_TYPE='DOCKER_ON_PREMISE'
 ENV COMMANDS_TRIGGERS_AND_FUNCTIONS_DEFAULT_URL='https://raw.githubusercontent.com/RedisGears/RedisGears/master/commands.json'

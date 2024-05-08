@@ -1,39 +1,3 @@
-# version: "3.9"
-# services:
-#   event-sourcing-nestjs-example:
-#     build: ./event-sourcing-nestjs-example
-#     depends_on:
-#       - redis
-#       - mongo
-#     ports:
-#       - '${APP_PORT}:3000'
-#     environment:
-#       KAFKA_BOOSTRAP_SERVERS: kafka:29092
-#       KAFKA_GROUP_ID: user
-#       REDIS_URL: ${REDIS_URL}
-#       MONGO_URL: ${MONGO_URL}
-#       JWT_SECRET: ${JWT_SECRET}
-#       PORT: ${APP_PORT}
-#       NODE_ENV: developer
-#     volumes:
-#       - ./src:/usr/src/app/src
-#   # redis:
-#   #   image: redis:latest
-#   #   ports:
-#   #     - "6379:6379"
-
-#   # mongo:
-#   #   image: mongo:latest
-#   #   ports:
-#   #     - "27017:27017"
-#   #   volumes:
-#   #     - mongo-data:/data/db
-
-# volumes:
-#   mongo-data:
-
-
-
 version: "3.9"
 
 services:
@@ -41,17 +5,20 @@ services:
     build: .
     image: cqrs-event-sourcing-services:latest
     ports:
-      - '${APP_PORT}:3000'
+      # - '${APP_PORT}:3000'
+      - '3005:3000'
     environment:
       # KAFKA_BOOSTRAP_SERVERS: kafka:29092
       # KAFKA_GROUP_ID: user
-      REDIS_URL: ${REDIS_URL}
-      MONGO_URL: ${MONGO_URL}
-      JWT_SECRET: ${JWT_SECRET}
-      PORT: ${APP_PORT}
+      # REDIS_URL: ${REDIS_URL}
+      # MONGO_URL: ${MONGO_URL}
+      # JWT_SECRET: ${JWT_SECRET}
+      # PORT: ${APP_PORT}
+      REDIS_URL: "redis://localhost:6379/0"
+      MONGO_URL: "mongodb://mongoadmin:mongoadmin@localhost:27017/eventstore?directConnection=true&authSource=admin"
+      JWT_SECRET: "STHOCAACRHUYUDKJAEAFUNM9XNRYMQKQWUROHGFFAWWHBDLRUEKP9XELIWDHWILSIHJTHDJKBCOCSNGLT"
+      PORT: 3005
       NODE_ENV: developer
-    networks:
-      - microservice_network
 
 networks:
   microservice_network:

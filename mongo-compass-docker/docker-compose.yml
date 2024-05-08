@@ -17,8 +17,6 @@ services:
       #MONGODB_AUTH_DATABASE: admin
     ports:
       - "27017:27017"
-    networks:
-      - microservice_network
     volumes:
       - ./workspace:/workspace
       - type: volume
