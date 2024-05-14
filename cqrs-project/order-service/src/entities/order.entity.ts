@@ -3,14 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  ObjectIdColumn,
   OneToMany,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { OrderItemEntity } from './order-item.entity';
 
 @Entity()
 export class OrderEntity {
-  @PrimaryGeneratedColumn()
+  @ObjectIdColumn()
   id: number;
 
   @Column()

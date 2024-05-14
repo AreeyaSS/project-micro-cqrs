@@ -12,7 +12,7 @@ export class CreateCustomerDto {
 
 export interface IProcessPaymentEvent {
   orderId: number;
-  customerId: number;
+  customerId: string;
   totalAmount: number;
   products: OrderItemDto[];
 }

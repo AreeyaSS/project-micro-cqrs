@@ -1,15 +1,8 @@
-import {
-  Column,
-  Entity,
-  Index,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, Index, ManyToOne, ObjectIdColumn } from 'typeorm';
 import { OrderEntity } from './order.entity';
-
 @Entity()
 export class OrderItemEntity {
-  @PrimaryGeneratedColumn()
+  @ObjectIdColumn()
   id: number;
 
   @Column()

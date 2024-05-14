@@ -1,3 +1,3 @@
 export class FindOneCustomerQuery {
-  constructor(public readonly customerId: number) {}
+  constructor(public readonly customerId: string) {}
 }

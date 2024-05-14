@@ -7,6 +7,7 @@ import {
 } from '@nestjs/microservices';
 import { CreateCustomerDto, IProcessPaymentEvent } from './customer.interface';
 import { CustomerService } from './customer.service';
+import { ObjectId } from 'mongodb';
 
 @Controller('customers')
 export class CustomerController {
@@ -22,21 +23,21 @@ export class CustomerController {
   }
 
   @Get(':id')
-  async getCustomer(@Param('id') id: number) {
+  async getCustomer(@Param('id') id: string) {
     const customer = await this.customerService.findOne(id);
     return { customer };
   }
 
   @MessagePattern({ cmd: 'processPayment' }, Transport.KAFKA)
   async processPayment(
-    @Payload() payload: { customerId: number; totalAmount: number },
+    @Payload() payload: { customerId: string; totalAmount: number },
   ): Promise<boolean> {
     return await this.customerService.processPayment(payload);
   }
 
   @EventPattern({ cmd: 'refundPayment' }, Transport.KAFKA)
   async compensateProcessPayment(
-    @Payload() payload: { customerId: number; totalAmount: number },
+    @Payload() payload: { customerId: string; totalAmount: number },
   ): Promise<boolean> {
     return await this.customerService.compensateProcessPayment(payload);
   }

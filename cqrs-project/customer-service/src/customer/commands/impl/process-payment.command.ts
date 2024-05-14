@@ -1,6 +1,6 @@
 export class ProcessPaymentCommand {
   constructor(
-    public readonly customerId: number,
+    public readonly customerId: string,
     public readonly totalAmount: number,
   ) {}
 }

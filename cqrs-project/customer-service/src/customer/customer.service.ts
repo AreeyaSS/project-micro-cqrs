@@ -25,9 +25,19 @@ export class CustomerService {
     this.stockService.connect();
   }
 
-  async findOne(id: number): Promise<CustomerEntity> {
+  async findOne(id: string): Promise<CustomerEntity> {
     return await this.queryBus.execute(new FindOneCustomerQuery(id));
   }
+
+  // async findOne(id: ObjectId): Promise<CustomerEntity> {
+  //   const customer = await this.customerRepository.findOne({
+  //     where: { _id: id },
+  //   });
+  //   if (!customer) {
+  //     throw new NotFoundException('Customer not found');
+  //   }
+  //   return customer;
+  // }
 
   async createCustomer(
     createCustomerDto: CreateCustomerDto,
@@ -38,7 +48,7 @@ export class CustomerService {
   }
 
   async processPayment(payload: {
-    customerId: number;
+    customerId: string;
     totalAmount: number;
   }): Promise<boolean> {
     return await this.commandBus.execute(
@@ -47,7 +57,7 @@ export class CustomerService {
   }
 
   async compensateProcessPayment(payload: {
-    customerId: number;
+    customerId: string;
     totalAmount: number;
   }): Promise<boolean> {
     return await this.commandBus.execute(
